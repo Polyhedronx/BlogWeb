@@ -1,5 +1,24 @@
 # Changelog
 
+## v0.5.2 — 移动端响应式修复 (2026-06-12)
+
+### 内容溢出修复
+- `.prose img` 添加 `max-width: 100%; height: auto`（图片不再超出屏幕）
+- `.prose table` 添加 `display: block; overflow-x: auto`（宽表格可横向滚动）
+- `.prose a` 添加 `word-break: break-all`（长 URL 自动断行）
+- 文章卡片标题/描述、评论区正文添加 `break-words`
+
+### 响应式优化
+- 移除 `prose-lg`，移动端字号缩小（正文 0.9375rem，标题等比缩放）
+- 代码块 padding 和字号在移动端缩小
+- 搜索框宽度改为 `w-28 xs:w-36 sm:w-48` 三档自适应
+- 评论操作按钮行添加 `flex-wrap` 防止重叠
+
+### CSS 体积
+- 44.8KB → 39.3KB（合并精简样式）
+
+---
+
 ## v0.5.1 — 路由精简 & 修复 (2026-06-12)
 
 ### 移除冗余路由

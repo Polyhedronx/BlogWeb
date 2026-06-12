@@ -100,6 +100,24 @@
 
 ---
 
+## 响应式规范
+
+### 断点
+| 前缀 | 宽度 | 用途 |
+|------|------|------|
+| 默认 | <640px | 手机 |
+| `sm:` | ≥640px | 平板及以上 |
+
+### 移动端规则
+- 文章正文：`overflow-wrap: break-word`，图片 `max-width: 100%`，表格 `overflow-x: auto`
+- 代码块：padding 0.75rem，字号 0.8125rem
+- 搜索框三档宽度：`w-28`（默认）→ `xs:w-36` → `sm:w-48`
+- 分类按钮 `flex-wrap` 自动换行
+- 评论操作栏 `flex-wrap` 防止按钮重叠
+- 所有文本容器添加 `break-words` 或 `overflow-wrap: break-word`
+
+---
+
 ## 文件组织
 
 ```
