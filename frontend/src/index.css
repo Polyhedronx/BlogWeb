@@ -157,6 +157,23 @@ body {
   color: #f8fafc;
 }
 
+/* ---- KaTeX ---- */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
+
+/* KaTeX dark mode */
+[data-theme="dark"] .katex {
+  color: #f1f5f9;
+}
+[data-theme="dark"] .katex .mord,
+[data-theme="dark"] .katex .mbin,
+[data-theme="dark"] .katex .mrel {
+  color: #f1f5f9;
+}
+
 /* ---- Comment system ---- */
 .comment-list > .comment-item + .comment-item {
   margin-top: 1.5rem;

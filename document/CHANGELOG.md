@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.5.4 — LaTeX 公式支持 (2026-06-13)
+
+### KaTeX 数学渲染
+- 安装 `remark-math` + `rehype-katex`，支持 `$...$` 行内和 `$$...$$` 块级公式
+- 超长公式自动横向滚动（`.katex-display { overflow-x: auto }`）
+- 暗色模式 KaTeX 字体色适配
+
+---
+
 ## v0.5.3 — 暗色主题 (2026-06-13)
 
 ### Google Material 暗色规范
