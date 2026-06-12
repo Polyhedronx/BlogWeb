@@ -66,7 +66,7 @@ export default function CommentForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-4 py-2 text-sm rounded-lg bg-[var(--color-primary)] text-white hover:opacity-90 disabled:opacity-50 transition-opacity"
+          className="px-4 py-2 text-sm rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90 disabled:opacity-50 transition-opacity"
         >
           {isSubmitting ? "提交中..." : isReply ? "回复" : "发表评论"}
         </button>

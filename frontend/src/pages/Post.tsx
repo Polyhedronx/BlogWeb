@@ -41,7 +41,7 @@ export default function PostPage() {
             返回上一步
           </button>
           {isPremium && (
-            <Link to="/login" className="text-sm px-4 py-1.5 rounded-lg bg-[var(--color-primary)] text-white hover:opacity-90">
+            <Link to="/login" className="text-sm px-4 py-1.5 rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90">
               去登录
             </Link>
           )}

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/lib/auth";
+import { ThemeProvider } from "@/lib/theme";
 import Layout from "@/components/layout/Layout";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
@@ -31,8 +32,9 @@ export default function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <BrowserRouter>
+        <ThemeProvider>
+          <AuthProvider>
+            <BrowserRouter>
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route element={<Layout />}>
@@ -47,7 +49,8 @@ export default function App() {
               </Routes>
             </Suspense>
           </BrowserRouter>
-        </AuthProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </QueryClientProvider>
     </HelmetProvider>
   );

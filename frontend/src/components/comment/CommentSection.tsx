@@ -94,7 +94,7 @@ export default function CommentSection({ postSlug }: CommentSectionProps) {
           </p>
           <Link
             to="/login"
-            className="text-sm px-4 py-1.5 rounded-lg bg-[var(--color-primary)] text-white hover:opacity-90 inline-block no-underline"
+            className="text-sm px-4 py-1.5 rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90 inline-block no-underline"
           >
             去登录
           </Link>

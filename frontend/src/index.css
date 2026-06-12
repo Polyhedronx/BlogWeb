@@ -20,6 +20,17 @@
   --color-border: #e5e7eb;
 }
 
+/* ---- Dark theme (Google Material You) ---- */
+[data-theme="dark"] {
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-primary: #f1f5f9;
+  --color-muted: #94a3b8;
+  --color-faint: #64748b;
+  --color-border: #334155;
+  --color-accent: #f4727a;
+}
+
 /* ---- Reset & base ---- */
 *,
 *::before,
@@ -115,6 +126,35 @@ body {
 .prose h3,
 .prose h4 {
   scroll-margin-top: 5rem;
+}
+
+/* ---- Dark theme overrides for prose ---- */
+[data-theme="dark"] .prose {
+  color: var(--color-primary);
+  --tw-prose-headings: #f1f5f9;
+  --tw-prose-bold: #f1f5f9;
+  --tw-prose-links: #93c5fd;
+  --tw-prose-quotes: #cbd5e1;
+}
+[data-theme="dark"] .prose :not(pre) > code {
+  background-color: #334155;
+  color: #e2e8f0;
+}
+[data-theme="dark"] .prose blockquote {
+  border-left-color: #475569;
+  color: #94a3b8;
+}
+[data-theme="dark"] .prose th {
+  background-color: #334155;
+  color: #f1f5f9;
+}
+[data-theme="dark"] .prose th,
+[data-theme="dark"] .prose td {
+  border-color: #475569;
+}
+[data-theme="dark"] .prose strong,
+[data-theme="dark"] .prose b {
+  color: #f8fafc;
 }
 
 /* ---- Comment system ---- */

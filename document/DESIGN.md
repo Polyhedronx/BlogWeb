@@ -2,18 +2,35 @@
 
 ## 色彩体系
 
+### 亮色模式
+
 | Token | 色值 | 用途 |
 |--------|------|------|
-| `--color-primary` | `#1a1a2e` | L1 深灰 — 正文、用户名等核心阅读内容 |
-| `--color-muted` | `#6b7280` | L2 中灰 — 默认态操作图标、次要文字 |
-| `--color-faint` | `#9ca3af` | L3 浅灰 — 时间戳、分割线等背景类元素 |
-| `--color-accent` | `#e94560` | 主色 — 仅用于点赞激活、OP 标签、重点强调 |
-| `--color-danger` | `#ef4444` | 警示红 — 仅用于点踩激活等负面状态 |
 | `--color-bg` | `#fafafa` | 页面背景 |
 | `--color-surface` | `#ffffff` | 卡片/容器背景 |
+| `--color-primary` | `#1a1a2e` | L1 — 正文、用户名 |
+| `--color-muted` | `#6b7280` | L2 — 默认图标、次要文字 |
+| `--color-faint` | `#9ca3af` | L3 — 时间戳、分割线 |
+| `--color-accent` | `#e94560` | 主色 — 按钮背景、点赞激活、OP 标签 |
+| `--color-danger` | `#ef4444` | 警示红 — 点踩激活 |
 | `--color-border` | `#e5e7eb` | 边框、分割线 |
 
-**原则**：全界面色彩控制在 主色 + 三级中性灰 + 警示红 范围内，禁随意使用绿色等杂色。
+### 暗色模式（Google Material You）
+
+| Token | 色值 | 对比度 |
+|-------|------|--------|
+| `--color-bg` | `#0f172a` | — |
+| `--color-surface` | `#1e293b` | 层级提升 |
+| `--color-primary` | `#f1f5f9` | 15:1 AAA |
+| `--color-muted` | `#94a3b8` | ~7:1 AA |
+| `--color-faint` | `#64748b` | ~4.5:1 |
+| `--color-accent` | `#f4727a` | 白字可读 |
+| `--color-border` | `#334155` | — |
+
+### 色彩分离原则
+- `--color-primary` 仅用于文字，禁用于按钮背景
+- `--color-accent` 用于所有按钮背景 `text-white`
+- 全界面色彩控制在 主色 + 三级中性灰 + 警示红 范围内
 
 ---
 

@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
+import { useTheme } from "@/lib/theme";
 import Header from "./Header";
 import Footer from "./Footer";
 import Drawer from "@/components/ui/Drawer";
@@ -12,10 +13,7 @@ export default function Layout() {
   const closeDrawer = useCallback(() => setDrawerOpen(false), []);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-
-  // TODO: isDark 等到 Phase 5 完善主题时接入
-  const isDark = false;
-  const toggleTheme = () => { /* Phase 5 */ };
+  const { isDark, toggle: toggleTheme } = useTheme();
 
   return (
     <div className="min-h-screen flex flex-col">

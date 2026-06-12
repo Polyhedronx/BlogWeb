@@ -98,7 +98,7 @@ export default function Home() {
             onClick={() => selectCategory(cat.key)}
             className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
               category === cat.key
-                ? "bg-[var(--color-primary)] text-white"
+                ? "bg-[var(--color-accent)] text-white"
                 : "text-[var(--color-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg)] border border-[var(--color-border)]"
             }`}
           >
@@ -185,7 +185,7 @@ function TagDropdown({
         onClick={() => setOpen(!open)}
         className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium transition-colors border ${
           selectedTag
-            ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)]"
+            ? "bg-[var(--color-accent)] text-white border-[var(--color-primary)]"
             : "text-[var(--color-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg)] border-[var(--color-border)]"
         }`}
       >
