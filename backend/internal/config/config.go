@@ -10,9 +10,11 @@ type Config struct {
 	DBPassword   string
 	DBName       string
 	ContentPath  string
-	AdminEmail   string
+	AdminEmail    string
 	AdminPassword string
-	JWTSecret    string
+	AdminUsername string
+	AdminAvatar   string
+	JWTSecret     string
 }
 
 func Load() *Config {
@@ -26,6 +28,8 @@ func Load() *Config {
 		ContentPath:   getEnv("CONTENT_PATH", "./content"),
 		AdminEmail:    getEnv("ADMIN_EMAIL", "admin@bolg.com"),
 		AdminPassword: getEnv("ADMIN_PASSWORD", "admin123"),
+		AdminUsername: getEnv("ADMIN_USERNAME", "Admin"),
+		AdminAvatar:   getEnv("ADMIN_AVATAR", ""),
 		JWTSecret:     getEnv("JWT_SECRET", "change-me-in-production"),
 	}
 }

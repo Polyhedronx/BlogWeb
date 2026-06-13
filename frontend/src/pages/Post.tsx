@@ -1,7 +1,7 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPost } from "@/lib/api";
-import { formatDate } from "@/lib/utils";
+import { formatDate, postUrl } from "@/lib/utils";
 import MarkdownRenderer from "@/components/post/MarkdownRenderer";
 import CommentSection from "@/components/comment/CommentSection";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
@@ -24,37 +24,76 @@ export default function PostPage() {
   if (error || !post) {
     const isPremium = error?.message?.includes("高级用户");
     return (
-      <div className="text-center py-16">
-        <h1 className="text-2xl font-bold mb-4">
-          {isPremium ? "高级用户专享" : "文章未找到"}
-        </h1>
-        <p className="text-[var(--color-muted)] mb-6">
-          {isPremium
-            ? "该文章仅对高级用户开放，请登录或升级账户后查看。"
-            : `找不到 slug 为 "${slug}" 的文章`}
-        </p>
-        <div className="flex items-center justify-center gap-3">
-          <button
-            onClick={() => navigate(-1)}
-            className="text-[var(--color-accent)] hover:underline"
-          >
-            返回上一步
-          </button>
-          {isPremium && (
-            <Link to="/login" className="text-sm px-4 py-1.5 rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90">
-              去登录
-            </Link>
-          )}
+      <>
+        <Helmet>
+          <title>{isPremium ? "高级用户专享" : "文章未找到"} - Bolg</title>
+        </Helmet>
+        <div className="text-center py-16">
+          <h1 className="text-2xl font-bold mb-4">
+            {isPremium ? "高级用户专享" : "文章未找到"}
+          </h1>
+          <p className="text-[var(--color-muted)] mb-6">
+            {isPremium
+              ? "该文章仅对高级用户开放，请登录或升级账户后查看。"
+              : `找不到 slug 为 "${slug}" 的文章`}
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => navigate(-1)}
+              className="text-[var(--color-accent)] hover:underline"
+            >
+              返回上一步
+            </button>
+            {isPremium && (
+              <Link to="/login" className="text-sm px-4 py-1.5 rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90">
+                去登录
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
+
+  // Compute canonical URL from post data
+  const canonicalUrl = `${window.location.origin}${postUrl(post)}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    url: canonicalUrl,
+    author: { "@type": "Person", name: "Bolg" },
+    ...(post.tags.length > 0 && { keywords: post.tags.join(", ") }),
+  };
 
   return (
     <>
       <Helmet>
         <title>{post.title} - Bolg</title>
         <meta name="description" content={post.description} />
+        {/* OpenGraph */}
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.description} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Bolg" />
+        <meta property="og:locale" content="zh_CN" />
+        <meta property="article:published_time" content={post.date} />
+        {post.tags.map((tag) => (
+          <meta key={tag} property="article:tag" content={tag} />
+        ))}
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.description} />
+        {/* Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(jsonLd)}
+        </script>
       </Helmet>
 
       <article className="min-w-0">

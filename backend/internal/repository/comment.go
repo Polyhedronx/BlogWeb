@@ -44,8 +44,26 @@ func (r *CommentRepository) Create(comment *model.Comment) error {
 	return r.db.Create(comment).Error
 }
 
-// Delete removes a comment by ID.
+// Delete removes a comment and all its descendants recursively.
+// Cleans up associated votes before deleting.
 func (r *CommentRepository) Delete(id uint) error {
+	// Collect all descendant IDs via recursive CTE
+	var allIDs []uint
+	r.db.Raw(`
+		WITH RECURSIVE descendants AS (
+			SELECT id FROM comments WHERE parent_id = ?
+			UNION ALL
+			SELECT c.id FROM comments c JOIN descendants d ON c.parent_id = d.id
+		)
+		SELECT id FROM descendants
+	`, id).Scan(&allIDs)
+
+	allIDs = append(allIDs, id)
+
+	// Clean up all votes for this comment and its descendants
+	r.db.Where("comment_id IN ?", allIDs).Delete(&model.CommentVote{})
+
+	// Delete the root comment — FK ON DELETE CASCADE handles children
 	return r.db.Delete(&model.Comment{}, id).Error
 }
 

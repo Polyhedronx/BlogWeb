@@ -57,3 +57,18 @@ export interface SearchResults {
   results: PostSummary[];
   query: string;
 }
+
+// About page data
+export interface About {
+  name: string;
+  avatar: string;
+  bio: string;
+  social_links: SocialLink[];
+  skills: string[];
+  content: string;
+}
+
+export interface SocialLink {
+  name: string;
+  url: string;
+}

@@ -1,6 +1,8 @@
 package router
 
 import (
+	"path/filepath"
+
 	"bolgweb/internal/handler"
 	"bolgweb/internal/middleware"
 
@@ -14,7 +16,9 @@ func Setup(
 	searchHandler *handler.SearchHandler,
 	rssHandler *handler.RSSHandler,
 	authHandler *handler.AuthHandler,
+	aboutHandler *handler.AboutHandler,
 	jwtSecret string,
+	contentPath string,
 ) *gin.Engine {
 	r := gin.Default()
 
@@ -25,6 +29,9 @@ func Setup(
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
 	})
+
+	// Static files (e.g. avatar images) served from content/static/
+	r.Static("/static", filepath.Join(contentPath, "static"))
 
 	// API v1 — 所有路由附带可选认证
 	v1 := r.Group("/api/v1")
@@ -70,6 +77,9 @@ func Setup(
 		// RSS & Sitemap
 		v1.GET("/rss", rssHandler.GetRSS)
 		v1.GET("/sitemap.xml", rssHandler.GetSitemap)
+
+		// About
+		v1.GET("/about", aboutHandler.GetAbout)
 
 		// Reload posts from disk
 		v1.POST("/reload", postHandler.ReloadPosts)

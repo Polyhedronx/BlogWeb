@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPosts, searchPosts } from "@/lib/api";
+import { Helmet } from "react-helmet-async";
 import PostCard from "@/components/post/PostCard";
 import Pagination from "@/components/ui/Pagination";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
@@ -56,6 +57,10 @@ export default function Home() {
   if (query) {
     return (
       <div>
+        <Helmet>
+          <title>搜索：{query} - Bolg</title>
+          <meta name="robots" content="noindex, follow" />
+        </Helmet>
         <div className="flex items-center gap-4 mb-8">
           <h1 className="text-2xl font-bold">
             搜索结果：<span className="text-[var(--color-accent)]">"{query}"</span>
@@ -88,8 +93,50 @@ export default function Home() {
   }
 
   // --- Normal homepage ---
+  const siteUrl = window.location.origin;
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Bolg",
+    url: siteUrl,
+    description: "个人博客 — 技术、随笔与日常思考",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${siteUrl}/?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Bolg",
+    url: siteUrl,
+    description: "个人博客 — 技术、随笔与日常思考",
+    inLanguage: "zh-CN",
+  };
+
   return (
     <div>
+      <Helmet>
+        <title>Bolg</title>
+        <meta name="description" content="个人博客 — 技术、随笔与日常思考" />
+        <meta property="og:title" content="Bolg" />
+        <meta property="og:description" content="个人博客 — 技术、随笔与日常思考" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={siteUrl} />
+        <meta property="og:site_name" content="Bolg" />
+        <meta property="og:locale" content="zh_CN" />
+        <link rel="canonical" href={siteUrl} />
+        <script type="application/ld+json">
+          {JSON.stringify(websiteJsonLd)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(blogJsonLd)}
+        </script>
+      </Helmet>
       {/* 分类筛选栏 */}
       <div className="flex items-center gap-2 mb-8 flex-wrap">
         {CATEGORIES.map((cat) => (

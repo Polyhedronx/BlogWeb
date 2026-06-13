@@ -65,6 +65,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 			"username": user.Username,
 			"email":    user.Email,
 			"role":     user.Role,
+			"avatar":   user.Avatar,
 		},
 	})
 }
@@ -101,6 +102,7 @@ func (h *AuthHandler) Login(c *gin.Context) {
 			"username": user.Username,
 			"email":    user.Email,
 			"role":     user.Role,
+			"avatar":   user.Avatar,
 		},
 	})
 }
@@ -122,6 +124,7 @@ func (h *AuthHandler) Me(c *gin.Context) {
 			"username": user.Username,
 			"email":    user.Email,
 			"role":     user.Role,
+			"avatar":   user.Avatar,
 		},
 	})
 }

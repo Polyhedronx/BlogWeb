@@ -5,6 +5,7 @@ import type {
   Comment,
   CreateCommentRequest,
   SearchResults,
+  About,
 } from "@/types";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api/v1";
@@ -99,4 +100,9 @@ export async function deleteComment(id: number): Promise<void> {
   return fetchJSON(`${API_BASE}/comments/${id}`, {
     method: "DELETE",
   });
+}
+
+// About
+export async function getAbout(): Promise<About> {
+  return fetchJSON<About>(`${API_BASE}/about`);
 }

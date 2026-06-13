@@ -97,8 +97,6 @@
 /tech/:slug                   技术文章
 /essay/:slug                  随笔文章
 /daily/:year/:month/:dateSlug 日常文章
-/tags                         标签列表
-/tags/:tag                    按标签筛选
 /login                        登录
 /register                     注册
 /about                        关于页（待实现）
@@ -108,7 +106,21 @@
 
 ---
 
-## 代码分割
+## SEO
+
+### 文章页 `<head>` 注入
+- OpenGraph: `og:title`, `og:description`, `og:type=article`, `og:url`, `og:site_name`, `og:locale`, `article:published_time`, `article:tag`
+- Twitter Card: `twitter:card=summary`
+- JSON-LD: `BlogPosting` schema（headline, description, datePublished, url, author, keywords）
+- Canonical URL: 分类前缀完整 URL
+
+### 首页 `<head>` 注入
+- OpenGraph: `og:type=website` 全套标签
+- JSON-LD: `WebSite`（含 SearchAction）+ `Blog` schema
+- Canonical URL
+
+### 搜索/404 页
+- `<meta name="robots" content="noindex">` 防止搜索引擎索引
 
 - `vendor-react`：React/Router/Query（每页必加载，长期缓存）
 - `vendor-markdown`：react-markdown + highlight.js（仅文章详情页加载）

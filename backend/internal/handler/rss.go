@@ -117,7 +117,7 @@ func (h *RSSHandler) GetSitemap(c *gin.Context) {
 
 	urls := []sitemapURL{
 		{Loc: h.siteURL, ChangeFreq: "daily", Priority: "1.0"},
-		{Loc: h.siteURL + "/tags", ChangeFreq: "weekly", Priority: "0.6"},
+		{Loc: h.siteURL + "/about", ChangeFreq: "monthly", Priority: "0.6"},
 	}
 
 	today := time.Now().Format("2006-01-02")

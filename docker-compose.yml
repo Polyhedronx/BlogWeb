@@ -38,6 +38,8 @@ services:
       CONTENT_PATH: /app/content
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@bolg.com}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-Admin}
+      ADMIN_AVATAR: ${ADMIN_AVATAR:-}
       JWT_SECRET: ${JWT_SECRET:-change-me}
     ports:
       - "${SERVER_PORT:-8080}:8080"

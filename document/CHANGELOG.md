@@ -1,5 +1,45 @@
 # Changelog
 
+## v0.7 — 关于页 (2026-06-13)
+
+### 新增
+- **关于页 `/about`**：个人卡片（头像/姓名/简介/社交链接/技能标签） + Markdown 正文
+- 内容来源 `content/about.md`（YAML frontmatter），修改后重新部署即可生效
+- 后端 `GET /api/v1/about` 端点，容错处理（文件缺失/格式错误不 crash）
+- 前端 `AboutPage`（React.lazy 懒加载），完整 SEO（OG + JSON-LD Person schema）
+- Header 添加「关于」导航链接（桌面端可见）
+- Sitemap 添加 `/about` URL
+
+### 移除
+- 笔记功能规划（不再实施）
+
+---
+
+## v0.6 — SEO 优化 (2026-06-13)
+
+### OpenGraph 标签
+- 文章详情页：`og:title`, `og:description`, `og:type=article`, `og:url`, `og:site_name`, `og:locale`
+- 文章详情页：`article:published_time`, `article:tag`（每个标签一个 meta）
+- 首页：`og:type=website` 全套 OG 标签
+- 搜索页 / 404 页添加 `meta robots=noindex` 防止索引
+
+### Twitter Card
+- 文章详情页添加 `twitter:card=summary`, `twitter:title`, `twitter:description`
+
+### JSON-LD 结构化数据
+- 文章详情页：`BlogPosting` schema（headline, description, datePublished, url, author, keywords）
+- 首页：`WebSite` schema（含 SearchAction 搜索入口）+ `Blog` schema
+
+### Canonical URL
+- 文章详情页 / 首页均添加 `<link rel="canonical">` 标签
+- 使用 `window.location.origin` 动态构建完整 URL
+
+### 其他
+- Login / Register / 404 页面添加 `<title>` Helmet 标签
+- 所有页面统一使用 `react-helmet-async` 管理 `<head>`
+
+---
+
 ## v0.5.4 — LaTeX 公式支持 (2026-06-13)
 
 ### KaTeX 数学渲染

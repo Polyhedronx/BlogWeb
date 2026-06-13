@@ -1,4 +1,5 @@
-import { Sun, Moon, LogIn, LogOut, User } from "lucide-react";
+import { Sun, Moon, LogIn, LogOut, User, Info } from "lucide-react";
+import { Link } from "react-router-dom";
 import Avatar from "@/components/ui/Avatar";
 
 const roleLabel: Record<string, string> = {
@@ -12,7 +13,7 @@ interface SettingsDrawerProps {
   isDark?: boolean;
   onToggleTheme?: () => void;
   /** 用户信息（null = 未登录） */
-  user?: { username: string; email?: string; role?: string } | null;
+  user?: { username: string; email?: string; role?: string; avatar?: string } | null;
   onLogin?: () => void;
   onLogout?: () => void;
 }
@@ -30,7 +31,11 @@ export default function SettingsDrawer({
       <div className="flex flex-col items-center gap-3 py-4">
         {user ? (
           <>
-            <Avatar name={user.username} email={user.email} size={56} />
+            {user.avatar ? (
+              <img src={user.avatar} alt={user.username} className="w-14 h-14 rounded-full object-cover border-2 border-[var(--color-border)]" />
+            ) : (
+              <Avatar name={user.username} email={user.email} size={56} />
+            )}
             <div className="text-center">
               <p className="font-medium text-sm">{user.username}</p>
               {user.role && (
@@ -47,6 +52,17 @@ export default function SettingsDrawer({
           </>
         )}
       </div>
+
+      <hr className="border-[var(--color-border)]" />
+
+      {/* 关于 */}
+      <Link
+        to="/about"
+        className="flex items-center gap-2 text-sm text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors no-underline"
+      >
+        <Info className="h-4 w-4" />
+        关于作者
+      </Link>
 
       <hr className="border-[var(--color-border)]" />
 

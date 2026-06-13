@@ -128,6 +128,7 @@ func (h *CommentHandler) DeleteOwnComment(c *gin.Context) {
 
 	userID := c.GetUint("user_id")
 	userRole, _ := c.Get("user_role")
+	userEmail, _ := c.Get("user_email")
 
 	comment, err := h.commentService.GetByID(uint(id))
 	if err != nil {
@@ -135,9 +136,14 @@ func (h *CommentHandler) DeleteOwnComment(c *gin.Context) {
 		return
 	}
 
-	// 只能删除自己的评论（管理员可以删除任何评论）
+	// 确定所有权：匹配 author_id，或旧评论（无 author_id）匹配 email
 	role, _ := userRole.(string)
-	if comment.AuthorID == nil || (*comment.AuthorID != userID && role != "admin") {
+	isOwner := comment.AuthorID != nil && *comment.AuthorID == userID
+	if !isOwner && comment.AuthorID == nil {
+		email, _ := userEmail.(string)
+		isOwner = email != "" && comment.AuthorEmail == email
+	}
+	if !isOwner && role != "admin" {
 		c.JSON(http.StatusForbidden, gin.H{"error": "只能删除自己的评论"})
 		return
 	}

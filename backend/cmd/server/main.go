@@ -52,10 +52,11 @@ func main() {
 			log.Fatalf("Failed to hash admin password: %v", err)
 		}
 		admin := &model.User{
-			Username:     "Admin",
+			Username:     cfg.AdminUsername,
 			Email:        cfg.AdminEmail,
 			PasswordHash: hash,
 			Role:         model.RoleAdmin,
+			Avatar:       cfg.AdminAvatar,
 		}
 		if err := userRepo.Create(admin); err != nil {
 			log.Fatalf("Failed to create admin user: %v", err)
@@ -84,8 +85,12 @@ func main() {
 	)
 	authHandler := handler.NewAuthHandler(userRepo, cfg.JWTSecret)
 
+	// Initialize about service
+	aboutService := service.NewAboutService(cfg.ContentPath)
+	aboutHandler := handler.NewAboutHandler(aboutService)
+
 	// Setup routes
-	r := router.Setup(postHandler, commentHandler, searchHandler, rssHandler, authHandler, cfg.JWTSecret)
+	r := router.Setup(postHandler, commentHandler, searchHandler, rssHandler, authHandler, aboutHandler, cfg.JWTSecret, cfg.ContentPath)
 
 	// Start server
 	addr := fmt.Sprintf(":%s", cfg.ServerPort)

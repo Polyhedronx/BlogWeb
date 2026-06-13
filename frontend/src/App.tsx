@@ -11,6 +11,7 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import Home from "@/pages/Home";
 
 const PostPage = lazy(() => import("@/pages/Post"));
+const AboutPage = lazy(() => import("@/pages/About"));
 const LoginPage = lazy(() => import("@/pages/Login"));
 const RegisterPage = lazy(() => import("@/pages/Register"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
@@ -42,6 +43,7 @@ export default function App() {
                   <Route path="/tech/:slug" element={<PostPage />} />
                   <Route path="/essay/:slug" element={<PostPage />} />
                   <Route path="/daily/:year/:month/:dateSlug" element={<PostPage />} />
+                  <Route path="/about" element={<AboutPage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
                   <Route path="*" element={<NotFound />} />

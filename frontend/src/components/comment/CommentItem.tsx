@@ -37,7 +37,11 @@ export default function CommentItem({
 
   const showReplyForm = replyingTo === comment.id;
   const isAdmin = user?.role === "admin";
-  const isOwn = user != null && user.id === comment.author_id;
+  const isOwn =
+    user != null &&
+    (user.id === comment.author_id ||
+      // Fallback for legacy comments (no author_id): match by email
+      (comment.author_id == null && !!comment.author_email && user.email === comment.author_email));
   const canDelete = isAdmin || isOwn;
   const replyCount = (comment.children || []).length;
 
