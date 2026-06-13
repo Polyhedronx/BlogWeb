@@ -31,7 +31,7 @@ func (h *SearchHandler) Search(c *gin.Context) {
 	results := service.SearchPosts(posts, query)
 
 	if results == nil {
-		results = []model.PostSummary{}
+		results = []model.SearchResultItem{}
 	}
 
 	c.JSON(http.StatusOK, gin.H{"results": results, "query": query})

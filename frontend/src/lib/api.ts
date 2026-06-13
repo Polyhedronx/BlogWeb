@@ -5,6 +5,7 @@ import type {
   Comment,
   CreateCommentRequest,
   SearchResults,
+  SearchResultItem,
   About,
 } from "@/types";
 
@@ -64,6 +65,8 @@ export async function searchPosts(query: string): Promise<SearchResults> {
     `${API_BASE}/search?q=${encodeURIComponent(query)}`
   );
 }
+
+export type { SearchResultItem };
 
 // Comments
 export async function getComments(

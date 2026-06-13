@@ -52,9 +52,14 @@ export interface CreateCommentRequest {
   parent_id?: number | null;
 }
 
+// Search result item (includes content snippet for preview)
+export interface SearchResultItem extends PostSummary {
+  snippet: string;
+}
+
 // Search results
 export interface SearchResults {
-  results: PostSummary[];
+  results: SearchResultItem[];
   query: string;
 }
 

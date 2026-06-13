@@ -121,6 +121,8 @@
 
 ### 搜索/404 页
 - `<meta name="robots" content="noindex">` 防止搜索引擎索引
+- 搜索结果使用列表式卡片（`SearchResultCard`），含正文片段预览
+- 片段中关键词用 `<mark>` 标签高亮：亮色 `#fde047` 底色 + 暗色 `#854d0e` 底色
 
 - `vendor-react`：React/Router/Query（每页必加载，长期缓存）
 - `vendor-markdown`：react-markdown + highlight.js（仅文章详情页加载）

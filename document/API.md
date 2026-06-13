@@ -63,10 +63,24 @@ Base URL: `http://localhost:8080/api/v1`
 
 ### `GET /search?q=关键词`
 全文搜索（大小写不敏感，搜索标题/描述/标签/正文）
+返回结果包含内容片段 `snippet`，关键词用 `「」` 包裹供前端高亮。
 
 ```json
 // 200
-{ "results": [...], "query": "关键词" }
+{
+  "results": [
+    {
+      "title": "Go Web 框架入门",
+      "date": "2026-06-10",
+      "tags": ["Go", "Gin", "Web"],
+      "category": "技术",
+      "slug": "go-gin-intro",
+      "description": "...",
+      "snippet": "介绍了 Go 语言的 gin「Go」框架的基本用法和设计模式..."
+    }
+  ],
+  "query": "Go"
+}
 ```
 
 ---

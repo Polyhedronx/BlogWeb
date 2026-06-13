@@ -45,6 +45,17 @@ type PostListResponse struct {
 	TotalPages int           `json:"total_pages"`
 }
 
+// SearchResultItem extends PostSummary with a content snippet for search results.
+type SearchResultItem struct {
+	Title       string   `json:"title"`
+	Date        string   `json:"date"`
+	Tags        []string `json:"tags"`
+	Category    string   `json:"category"`
+	Slug        string   `json:"slug"`
+	Description string   `json:"description"`
+	Snippet     string   `json:"snippet"`
+}
+
 // TagCount represents a tag with the number of articles that use it.
 type TagCount struct {
 	Name  string `json:"name"`

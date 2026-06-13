@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPosts, searchPosts } from "@/lib/api";
 import { Helmet } from "react-helmet-async";
 import PostCard from "@/components/post/PostCard";
+import SearchResultCard from "@/components/post/SearchResultCard";
 import Pagination from "@/components/ui/Pagination";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import { ChevronDown } from "lucide-react";
@@ -82,9 +83,9 @@ export default function Home() {
         )}
 
         {searchQuery.data && (
-          <div className="space-y-6">
-            {searchQuery.data.results.map((post) => (
-              <PostCard key={post.slug} post={post} />
+          <div className="space-y-1">
+            {searchQuery.data.results.map((item) => (
+              <SearchResultCard key={item.slug} item={item} />
             ))}
           </div>
         )}
